@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -16,24 +17,60 @@ public final class MaxHeap<T extends Comparable<? super T>>
    private T[] heap;      // Array of heap entries; ignore heap[0]
    private int lastIndex; // Index of last entry and number of entries
    private boolean integrityOK = false;
+   private int swapsdone; //holds how many swaps were done. added "swapsdone++" in the add method
 	private static final int DEFAULT_CAPACITY = 25;
 	private static final int MAX_CAPACITY = 10000;
-   //public PrintWriter a = new PrintWriter("src\testing.txt");
+   
 
    public static void main(String[] args) throws IOException
    {
-      File sorted = new File("src/data_sorted.txt");
+      File sorted = new File("data_sorted.txt");
       Scanner sortedinput = new Scanner(sorted);
 
-      File random = new File("src/data_random.txt");
+      File random = new File("data_random.txt");
       Scanner randinput = new Scanner(random);
 
+      FileWriter outputfile = new FileWriter("output.txt", true);
+      PrintWriter output = new PrintWriter(outputfile);
+
       MaxHeap<Integer> sortedheap = new MaxHeap<>();
+      //MaxHeap<Integer> sortedheapop = new MaxHeap<>(); optimal method version
+      MaxHeap<Integer> randheap = new MaxHeap<>();
+      //MaxHeap<Integer> randheapop = new MaxHeap<>(); // optimal method version
+
+      int sortedcount = 0;
 
       while (sortedinput.hasNext()){
-         
+         int intdata = Integer.parseInt(sortedinput.nextLine());
+         sortedheap.add(intdata);
+         sortedcount++;
       }
 
+      Integer sortedarray[] = new Integer[sortedcount];
+
+      for (int i = 1; i <= sortedcount; i++){
+         //int intdata = Integer.parseInt(sortedinput.nextLine());
+         //sortedarray[i] = intdata;
+      }
+
+      MaxHeap<Integer> sortedheapop = new MaxHeap<>(sortedarray); //optimal method version
+
+      for (int i = 1; i <= 10; i++){
+         System.out.println(sortedheap.getData(i) + ", ");
+         output.print(sortedheap.getData(i) + ", ");
+
+         //output.print(sortedheapop.getData(i) + ", ");
+      }
+      output.println("");
+      output.println(sortedheap.swapsdone);
+      output.close();
+      //System.out.println(sortedheap.swapsdone);
+
+      /*
+      for (int i = 1; i <= sortedheapop.getSize(); i++){
+         System.out.print(sortedheapop.getData(i) + ", ");
+      }
+*/
       //PrintWriter outputFile = new PrintWriter("src/testing.txt");
    }
    
@@ -58,6 +95,24 @@ public final class MaxHeap<T extends Comparable<? super T>>
       integrityOK = true;
    } // end constructor
 
+   public MaxHeap(T[] entries)
+   {
+      this(entries.length); // Call other constructor
+      lastIndex = entries.length;
+      // Assertion: integrityOK = true
+
+      // Copy given array to data field
+      for (int index = 0; index < entries.length; index++)
+         heap[index + 1] = entries[index];
+
+      // Create heap
+      for (int rootIndex = lastIndex / 2; rootIndex > 0; rootIndex--){
+         reheap(rootIndex);
+         swapsdone++;
+      }
+         //reheap(rootIndex);
+   } // end constructor
+
    public void add(T newEntry)
    {
       checkIntegrity();        // Ensure initialization of data fields
@@ -68,6 +123,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
        heap[newIndex] = heap[parentIndex];
          newIndex = parentIndex;
        parentIndex = newIndex / 2;
+       swapsdone++;
       } // end while
 
       heap[newIndex] = newEntry;
@@ -173,6 +229,15 @@ public final class MaxHeap<T extends Comparable<? super T>>
          if (!integrityOK)
             throw new SecurityException("MaxHeap object is corrupt.");
       } // end checkIntegrity
+
+   private T getData(int x)
+   {
+      return heap[x];
+   }
+   
+   private int getSwaps(){
+      return swapsdone;
+   }
    
 // Private methods
 // . . .
