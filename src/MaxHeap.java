@@ -24,21 +24,25 @@ public final class MaxHeap<T extends Comparable<? super T>>
 
    public static void main(String[] args) throws IOException
    {
+      //setting up files to be read
       File sorted = new File("data_sorted.txt");
       Scanner sortedinput = new Scanner(sorted);
 
       File random = new File("data_random.txt");
       Scanner randinput = new Scanner(random);
-
+      //making output file
       FileWriter outputfile = new FileWriter("output.txt", true);
       PrintWriter output = new PrintWriter(outputfile);
 
+      //setting up heaps to have data added
       MaxHeap<Integer> sortedheap = new MaxHeap<>();
       MaxHeap<Integer> randheap = new MaxHeap<>();
 
+      //making array for optimal method
       int sortedcount = 0;
       Integer sortedarray[] = new Integer[100];
 
+      //adding data into heap and array
       while (sortedinput.hasNext()){
          int intdata = Integer.parseInt(sortedinput.nextLine());
          sortedheap.add(intdata);
@@ -46,6 +50,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
          sortedarray[sortedcount - 1] = intdata;
       }
 
+      //does the same thing from above but for the random input instead
       int randcount = 0;
       Integer randarray[] = new Integer[100];
 
@@ -59,6 +64,117 @@ public final class MaxHeap<T extends Comparable<? super T>>
       MaxHeap<Integer> sortedheapop = new MaxHeap<>(sortedarray); //optimal method version
       MaxHeap<Integer> randheapop = new MaxHeap<>(randarray); //optimal method version
 
+      //start of printing lines on output file
+      output.println("sorted input: ");
+      output.print("Heap built using sequential insertions: ");
+      for (int i = 1; i <= 10; i++){
+         if (i != 10){
+            output.print(sortedheap.getData(i) + ", ");
+         }
+         else{
+            output.print(sortedheap.getData(i) + ",...");
+         }
+      }
+      output.println("\nNumber of swaps in the heap creation: " + sortedheap.swapsdone);
+      //removing 10 elements
+      for (int i= 1; i <= 10; i++){
+         sortedheap.removeMax();
+      }
+
+      output.print("Heap after 10 removals: ");
+      for (int i = 1; i <= 10; i++){
+         if (i != 10){
+            output.print(sortedheap.getData(i) + ", ");
+         }
+         else{
+            output.print(sortedheap.getData(i) + ",...\n");
+         }
+      }
+      output.println("");
+
+      //sorted optimal method output
+      output.print("Heap built using optimal method: ");
+      for (int i = 1; i <= 10; i++){
+         if (i != 10){
+            output.print(sortedheapop.getData(i) + ", ");
+         }
+         else{
+            output.print(sortedheapop.getData(i) + ",...");
+         }
+      }
+      output.println("\nNumber of swaps in the heap creation: " + sortedheapop.swapsdone);
+      //removing 10 elements
+      for (int i= 1; i <= 10; i++){
+         sortedheapop.removeMax();
+      }
+
+      output.print("Heap after 10 removals: ");
+      for (int i = 1; i <= 10; i++){
+         if (i != 10){
+            output.print(sortedheapop.getData(i) + ", ");
+         }
+         else{
+            output.print(sortedheapop.getData(i) + ",...\n");
+         }
+      }
+      output.println("");
+
+      //random input
+      output.println("random input: ");
+      output.print("Heap built using sequential insertions: ");
+      for (int i = 1; i <= 10; i++){
+         if (i != 10){
+            output.print(randheap.getData(i) + ", ");
+         }
+         else{
+            output.print(randheap.getData(i) + ",...");
+         }
+      }
+      output.println("\nNumber of swaps in the heap creation: " + randheap.swapsdone);
+      //removing 10 elements
+      for (int i= 1; i <= 10; i++){
+         randheap.removeMax();
+      }
+
+      output.print("Heap after 10 removals: ");
+      for (int i = 1; i <= 10; i++){
+         if (i != 10){
+            output.print(randheap.getData(i) + ", ");
+         }
+         else{
+            output.print(randheap.getData(i) + ",...\n");
+         }
+      }
+      output.println("");
+
+      //random input, optimal method
+      output.print("Heap built using optimal method: ");
+      for (int i = 1; i <= 10; i++){
+         if (i != 10){
+            output.print(randheapop.getData(i) + ", ");
+         }
+         else{
+            output.print(randheapop.getData(i) + ",...");
+         }
+      }
+      output.println("\nNumber of swaps in the heap creation: " + randheapop.swapsdone);
+      //removing 10 elements
+      for (int i= 1; i <= 10; i++){
+         randheapop.removeMax();
+      }
+
+      output.print("Heap after 10 removals: ");
+      for (int i = 1; i <= 10; i++){
+         if (i != 10){
+            output.print(randheapop.getData(i) + ", ");
+         }
+         else{
+            output.print(randheapop.getData(i) + ",...\n");
+         }
+      }
+      output.println("");
+
+      /*
       for (int i = 1; i <= 10; i++){
          output.print(sortedheap.getData(i) + ", ");
       }
@@ -98,6 +214,8 @@ public final class MaxHeap<T extends Comparable<? super T>>
 
       output.println("");
       output.println(randheapop.swapsdone);
+
+      */ 
       output.close();
    }
    
