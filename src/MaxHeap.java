@@ -39,32 +39,53 @@ public final class MaxHeap<T extends Comparable<? super T>>
       //MaxHeap<Integer> randheapop = new MaxHeap<>(); // optimal method version
 
       int sortedcount = 0;
+      Integer[] testarray = new Integer[2];
+      testarray[0] = 1;
+      testarray[1] = 2;
+      Integer sortedarray[] = new Integer[100];
 
       while (sortedinput.hasNext()){
          int intdata = Integer.parseInt(sortedinput.nextLine());
          sortedheap.add(intdata);
          sortedcount++;
+         sortedarray[sortedcount - 1] = intdata;
+         
       }
 
-      Integer sortedarray[] = new Integer[sortedcount];
 
-      for (int i = 1; i <= sortedcount; i++){
+      //for (int i = 1; i <= sortedcount; i++){
          //int intdata = Integer.parseInt(sortedinput.nextLine());
          //sortedarray[i] = intdata;
-      }
+      //}
 
       MaxHeap<Integer> sortedheapop = new MaxHeap<>(sortedarray); //optimal method version
 
       for (int i = 1; i <= 10; i++){
-         System.out.println(sortedheap.getData(i) + ", ");
+         //System.out.println(sortedheap.getData(i) + ", ");
          output.print(sortedheap.getData(i) + ", ");
+
+         //System.out.println(sortedheapop.getData(i));
 
          //output.print(sortedheapop.getData(i) + ", ");
       }
       output.println("");
       output.println(sortedheap.swapsdone);
+
+      output.println("");
+
+      for (int i = 1; i <= 10; i++){
+         //System.out.println(sortedheap.getData(i) + ", ");
+         output.print(sortedheapop.getData(i) + ", ");
+
+         //System.out.println(sortedheapop.getData(i));
+
+         //output.print(sortedheapop.getData(i) + ", ");
+      }
+
+      output.println("");
+      output.println(sortedheapop.swapsdone);
       output.close();
-      //System.out.println(sortedheap.swapsdone);
+
 
       /*
       for (int i = 1; i <= sortedheapop.getSize(); i++){
@@ -108,7 +129,6 @@ public final class MaxHeap<T extends Comparable<? super T>>
       // Create heap
       for (int rootIndex = lastIndex / 2; rootIndex > 0; rootIndex--){
          reheap(rootIndex);
-         swapsdone++;
       }
          //reheap(rootIndex);
    } // end constructor
@@ -187,6 +207,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
       {
          int largerChildIndex = leftChildIndex; // Assume larger
          int rightChildIndex = leftChildIndex + 1;
+         swapsdone++;
 
          if ( (rightChildIndex <= lastIndex) &&
                heap[rightChildIndex].compareTo(heap[largerChildIndex]) > 0)
