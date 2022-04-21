@@ -281,6 +281,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
       lastIndex = 0;
    } // end clear
 
+   //private methods
    private void reheap(int rootIndex)
    {
       boolean done = false;
@@ -344,6 +345,5 @@ public final class MaxHeap<T extends Comparable<? super T>>
       return swapsdone;
    }
    
-// Private methods
 // . . .
 } // end MaxHeap
