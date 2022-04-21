@@ -1,3 +1,5 @@
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 /**
    A class that implements the ADT maxheap by using an array.
@@ -14,6 +16,12 @@ public final class MaxHeap<T extends Comparable<? super T>>
    private boolean integrityOK = false;
 	private static final int DEFAULT_CAPACITY = 25;
 	private static final int MAX_CAPACITY = 10000;
+
+   public static void main(String[] args) throws IOException
+   {
+      System.out.println("Hello World");
+      PrintWriter outputFile = new PrintWriter("testing.txt");
+   }
    
    public MaxHeap()
    {
