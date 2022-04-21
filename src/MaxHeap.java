@@ -174,48 +174,6 @@ public final class MaxHeap<T extends Comparable<? super T>>
       }
       output.println("");
 
-      /*
-      for (int i = 1; i <= 10; i++){
-         output.print(sortedheap.getData(i) + ", ");
-      }
-      output.println("");
-      output.println(sortedheap.swapsdone);
-
-      output.println("");
-
-      for (int i = 1; i <= 10; i++){
-         output.print(sortedheapop.getData(i) + ", ");
-      }
-
-      output.println("");
-      output.println(sortedheapop.swapsdone);
-
-      for (int i = 1; i <= 10; i++){
-         sortedheap.removeMax();
-      }
-
-      for (int i = 1; i <= 10; i++){
-         output.print(sortedheap.getData(i) + ", ");
-      }
-
-      output.println("");
-
-      for (int i = 1; i <= 10; i++){
-         output.print(randheap.getData(i) + ", ");
-      }
-      output.println("");
-      output.println(randheap.swapsdone);
-
-      output.println("");
-
-      for (int i = 1; i <= 10; i++){
-         output.print(randheapop.getData(i) + ", ");
-      }
-
-      output.println("");
-      output.println(randheapop.swapsdone);
-
-      */ 
       output.close();
    }
    
