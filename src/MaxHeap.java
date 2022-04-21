@@ -34,14 +34,9 @@ public final class MaxHeap<T extends Comparable<? super T>>
       PrintWriter output = new PrintWriter(outputfile);
 
       MaxHeap<Integer> sortedheap = new MaxHeap<>();
-      //MaxHeap<Integer> sortedheapop = new MaxHeap<>(); optimal method version
       MaxHeap<Integer> randheap = new MaxHeap<>();
-      //MaxHeap<Integer> randheapop = new MaxHeap<>(); // optimal method version
 
       int sortedcount = 0;
-      Integer[] testarray = new Integer[2];
-      testarray[0] = 1;
-      testarray[1] = 2;
       Integer sortedarray[] = new Integer[100];
 
       while (sortedinput.hasNext()){
@@ -49,24 +44,23 @@ public final class MaxHeap<T extends Comparable<? super T>>
          sortedheap.add(intdata);
          sortedcount++;
          sortedarray[sortedcount - 1] = intdata;
-         
       }
 
+      int randcount = 0;
+      Integer randarray[] = new Integer[100];
 
-      //for (int i = 1; i <= sortedcount; i++){
-         //int intdata = Integer.parseInt(sortedinput.nextLine());
-         //sortedarray[i] = intdata;
-      //}
+      while (randinput.hasNext()){
+         int randdata = Integer.parseInt(randinput.nextLine());
+         randheap.add(randdata);
+         randcount++;
+         randarray[randcount - 1] = randdata;
+      }
 
       MaxHeap<Integer> sortedheapop = new MaxHeap<>(sortedarray); //optimal method version
+      MaxHeap<Integer> randheapop = new MaxHeap<>(randarray); //optimal method version
 
       for (int i = 1; i <= 10; i++){
-         //System.out.println(sortedheap.getData(i) + ", ");
          output.print(sortedheap.getData(i) + ", ");
-
-         //System.out.println(sortedheapop.getData(i));
-
-         //output.print(sortedheapop.getData(i) + ", ");
       }
       output.println("");
       output.println(sortedheap.swapsdone);
@@ -74,25 +68,37 @@ public final class MaxHeap<T extends Comparable<? super T>>
       output.println("");
 
       for (int i = 1; i <= 10; i++){
-         //System.out.println(sortedheap.getData(i) + ", ");
          output.print(sortedheapop.getData(i) + ", ");
-
-         //System.out.println(sortedheapop.getData(i));
-
-         //output.print(sortedheapop.getData(i) + ", ");
       }
 
       output.println("");
       output.println(sortedheapop.swapsdone);
-      output.close();
 
-
-      /*
-      for (int i = 1; i <= sortedheapop.getSize(); i++){
-         System.out.print(sortedheapop.getData(i) + ", ");
+      for (int i = 1; i <= 10; i++){
+         sortedheap.removeMax();
       }
-*/
-      //PrintWriter outputFile = new PrintWriter("src/testing.txt");
+
+      for (int i = 1; i <= 10; i++){
+         output.print(sortedheap.getData(i) + ", ");
+      }
+
+      output.println("");
+
+      for (int i = 1; i <= 10; i++){
+         output.print(randheap.getData(i) + ", ");
+      }
+      output.println("");
+      output.println(randheap.swapsdone);
+
+      output.println("");
+
+      for (int i = 1; i <= 10; i++){
+         output.print(randheapop.getData(i) + ", ");
+      }
+
+      output.println("");
+      output.println(randheapop.swapsdone);
+      output.close();
    }
    
    public MaxHeap()
@@ -207,7 +213,6 @@ public final class MaxHeap<T extends Comparable<? super T>>
       {
          int largerChildIndex = leftChildIndex; // Assume larger
          int rightChildIndex = leftChildIndex + 1;
-         swapsdone++;
 
          if ( (rightChildIndex <= lastIndex) &&
                heap[rightChildIndex].compareTo(heap[largerChildIndex]) > 0)
@@ -220,6 +225,7 @@ public final class MaxHeap<T extends Comparable<? super T>>
             heap[rootIndex] = heap[largerChildIndex];
             rootIndex = largerChildIndex;
             leftChildIndex = 2 * rootIndex;
+            swapsdone++;
          }
       else
          done = true;
