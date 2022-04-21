@@ -175,6 +175,8 @@ public final class MaxHeap<T extends Comparable<? super T>>
       output.println("");
 
       output.close();
+      sortedinput.close();
+      randinput.close();
    }
    
    public MaxHeap()
